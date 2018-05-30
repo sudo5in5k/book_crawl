@@ -1,0 +1,4 @@
+https://www.seshop.com/search?keyword={0}&products_type_id=327
+https://gihyo.jp/dp?query={0}
+https://tatsu-zine.com/sitesearch?q={0}
+https://book.mynavi.jp/ec/products/?topics_group_id=1&topics_keyword={0}
