@@ -8,10 +8,17 @@ import sys
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 try:
-    book_title = sys.argv[1]
+    book_title = ""
+    for index, arg in enumerate(sys.argv):
+        # 空白がある本を検索する場合、タイトルがすべて取得できないため修正
+        if not index == 0:
+            book_title += " " + str(arg)
 except IndexError:
     with open("title.txt") as f:
-        book_title = f.read()
+        book_title = str(f.read())
+
+if "#" in book_title:
+    book_title = book_title.replace("#", "%23")
 
 # fetch titles crawling
 with open("crawl_urls.txt") as f:
@@ -21,7 +28,9 @@ driver = webdriver.Chrome(executable_path=dir_path + '/chromedriver')
 
 for index, url in enumerate(urls):
     if index == 0:
-        driver.get(url.format(book_title))
+        target_url = url.format(book_title)
+        print(target_url)
+        driver.get(target_url)
     else:
         driver.execute_script("window.open('');")
         driver.switch_to_window(driver.window_handles[index])
